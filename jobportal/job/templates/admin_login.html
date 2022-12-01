@@ -1,0 +1,29 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+<marquee style = "font-family: 'Monotype Corsiva'; font-size: 25px; color: white; background-color: rgb(31, 125, 187); margin-top: 1%; font-weight: bold">Admin Login</marquee>
+<hr>
+<form class="container mt-5" method="post">
+    {% csrf_token %}
+    <label><b>User Name</b></label>
+    <input type="text" class="form-control" name="uname" placeholder="Enter UserName">
+    <label><b>Password</b></label>
+    <input type="password" class="form-control" name="pwd" placeholder="Enter Password"><br>
+    <input type="submit" class="btn btn-primary">
+</form>
+
+{% if error == "no" %}
+<script>
+    alert("Login Successfull");
+    window.location = ("{% url 'admin_home' %}");
+ </script>
+ {% endif %}
+ {% if error == "yes" %}
+ <script>
+    alert("Something went wrong try again");
+ </script>
+ {% endif %}
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'user_navigation.html' %}
+
+<marquee style = "font-family: 'Monotype Corsiva'; font-size: 25px; color: white; background-color: rgb(31, 125, 187); margin-top: 1%; font-weight: bold">User Profile</marquee>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <form class="mt-5" method="post"enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Frist Name</label>
+                        <input type="text" class="form-control" name="fname" value={{student.user.first_name}}>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" name="lname" value={{student.user.last_name}}>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Contact</label>
+                        <input type="text" class="form-control" name="contact" value={{student.moblie}}>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" value={{student.user.username}} readonly>
+                    </div>
+                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Gender</label>
+                            {% if student.gender == "Male" %}
+                            <div style="border:1px solid lightgray; padding:6px; border-radius:6px">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customcontrolinline1" class="form-control-input" value="Male" name="gender" checked>
+                                    <label class="custom-control-label" for="customcontrolinline1">Male</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customcontrolinline2" class="form-control-input" value="Female" name="gender" >
+                                    <label class="custom-control-label" for="customcontrolinline2">Female</label>
+                            </div>
+                            </div>
+                            {% else %}
+
+                            <div style="border:1px solid lightgray; padding:6px; border-radius:6px">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customcontrolinline1" class="form-control-input" value="Male" name="gender" >
+                                        <label class="custom-control-label" for="customcontrolinline1">Male</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customcontrolinline2" class="form-control-input" value="Female" name="gender" checked >
+                                        <label class="custom-control-label" for="customcontrolinline2">Female</label>
+                                </div>
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Image</label>
+                            <input type="file" name="image" class="form-control" accept="image/*" >
+                        </div>
+                    </div>
+                    <input type="submit" value="submit" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="col-sm-4 mt-5 text-center">
+                <img src="{{student.image.url}}" width="300px" height="300px">
+            </div>
+    </div>
+</div>            
+
+
+
+
+{% include 'footer.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Profile Updated Successfully");
+    window.location = ("{% url 'user_home' %}");
+ </script>
+ {% endif %}
+ {% if error == "yes" %}
+ <script>
+    alert("Something went wrong try again");
+ </script>
+ {% endif %}
+
+{% include 'footer.html' %}
+{% endblock %}

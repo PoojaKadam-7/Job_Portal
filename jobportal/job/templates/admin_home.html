@@ -1,0 +1,28 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'admin_navigation.html' %}
+<style>
+    .mydiv:hover{
+        box-shadow: 0 0 20px 0 rgba(0,0,0,0.3);
+        transform: translateY(-20);
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-6 mydiv">
+            <h4 class="text-center"><i class="fa fa-phone-square"></i> Total Recruiter</h4>
+            <p class="text-center font-weight-bold">{{rcount}}</p>
+        </div>
+        <div class="col-sm-6 mydiv">
+            <h4 class="text-center"><i class="fa fa-user"></i> Total Users </h4>
+            <p class="text-center font-weight-bold">{{scount}}</p>
+        </div>
+    </div>
+</div>
+
+
+{% include 'footer.html' %}
+{% endblock %}
